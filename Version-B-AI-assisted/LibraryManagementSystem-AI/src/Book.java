@@ -1,10 +1,9 @@
 public class Book {
+
     private String bookId;
     private String title;
     private String author;
     private boolean isAvailable;
-
-    // NEW
     private Member borrowedBy;
 
     public Book(String bookId, String title, String author) {
@@ -35,7 +34,6 @@ public class Book {
         isAvailable = available;
     }
 
-    // NEW METHODS
     public Member getBorrowedBy() {
         return borrowedBy;
     }
@@ -45,14 +43,16 @@ public class Book {
     }
 
     public void displayInfo() {
+
         System.out.print(
                 "ID: " + bookId +
-                        " Title: " + title +
-                        " Author: " + author +
-                        " Status: " + (isAvailable ? "Available" : "Borrowed"));
+                        " | Title: " + title +
+                        " | Author: " + author +
+                        " | Status: " + (isAvailable ? "Available" : "Borrowed")
+        );
 
         if (!isAvailable && borrowedBy != null) {
-            System.out.print(" Borrowed By: " + borrowedBy.getName());
+            System.out.print(" | Borrowed By: " + borrowedBy.getName());
         }
 
         System.out.println();

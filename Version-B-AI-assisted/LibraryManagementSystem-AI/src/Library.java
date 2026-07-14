@@ -20,15 +20,34 @@ public class Library {
         System.out.println("Member registered successfully: " + member.getName());
     }
 
-    public void borrowBook(String bookId) {
+    public void borrowBook(String bookId, String memberId) {
 
+        Member borrower = null;
+
+        // Check whether member exists
+        for (Member member : members) {
+            if (member.getMemberId().equals(memberId)) {
+                borrower = member;
+                break;
+            }
+        }
+
+        if (borrower == null) {
+            System.out.println("Member not found!");
+            return;
+        }
+
+        // Find the requested book
         for (Book book : books) {
 
             if (book.getBookId().equals(bookId)) {
 
                 if (book.getIsAvailable()) {
+
                     book.setAvailable(false);
-                    System.out.println("Book borrowed successfully!");
+                    book.setBorrowedBy(borrower);
+
+                    System.out.println("Book borrowed successfully by " + borrower.getName() + "!");
                 } else {
                     System.out.println("Sorry, this book is already borrowed.");
                 }
@@ -47,7 +66,10 @@ public class Library {
             if (book.getBookId().equals(bookId)) {
 
                 if (!book.getIsAvailable()) {
+
                     book.setAvailable(true);
+                    book.setBorrowedBy(null);
+
                     System.out.println("Book returned successfully!");
                 } else {
                     System.out.println("This book was not borrowed.");
