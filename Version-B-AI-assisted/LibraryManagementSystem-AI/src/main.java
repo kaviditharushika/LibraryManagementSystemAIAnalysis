@@ -7,11 +7,10 @@ public class main {
         Library library = new Library();
         Scanner scanner = new Scanner(System.in);
 
-        // Sample Books
+        // Sample Data
         library.addBook(new Book("B001", "Madol Doova", "Martin Wickramasinghe"));
         library.addBook(new Book("B002", "Hath Pana", "Kumaratunga Munidasa"));
 
-        // Sample Members
         library.registerMember(new Member("M001", "Saduni"));
         library.registerMember(new Member("M002", "Nimal"));
 
@@ -24,17 +23,18 @@ public class main {
             System.out.println("2. Borrow a Book");
             System.out.println("3. Return a Book");
             System.out.println("4. Exit");
+            System.out.println("5. Add a New Book");
+            System.out.println("6. Register a New Member");
             System.out.print("Enter your choice: ");
 
-            // Validate menu input
             if (!scanner.hasNextInt()) {
-                System.out.println("Invalid input! Please enter a number between 1 and 4.");
-                scanner.nextLine(); // Clear invalid input
+                System.out.println("Invalid input! Please enter a number between 1 and 6.");
+                scanner.nextLine();
                 continue;
             }
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
 
@@ -66,8 +66,31 @@ public class main {
                     System.exit(0);
                     break;
 
+                case 5:
+                    System.out.print("Enter Book ID: ");
+                    String bookId = scanner.nextLine();
+
+                    System.out.print("Enter Book Title: ");
+                    String title = scanner.nextLine();
+
+                    System.out.print("Enter Author: ");
+                    String author = scanner.nextLine();
+
+                    library.addBook(new Book(bookId, title, author));
+                    break;
+
+                case 6:
+                    System.out.print("Enter Member ID: ");
+                    String newMemberId = scanner.nextLine();
+
+                    System.out.print("Enter Member Name: ");
+                    String name = scanner.nextLine();
+
+                    library.registerMember(new Member(newMemberId, name));
+                    break;
+
                 default:
-                    System.out.println("Invalid choice! Please enter a number between 1 and 4.");
+                    System.out.println("Invalid choice! Please enter a number between 1 and 6.");
             }
         }
     }
